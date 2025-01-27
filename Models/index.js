@@ -1,10 +1,10 @@
-const Patient = require('./patient');
-const Doctor = require('./doctor');
-const Appointment = require('./appointment');
+import Patient, { hasMany } from './patient';
+import Doctor, { hasMany as _hasMany } from './doctor';
+import Appointment, { belongsTo } from './appointment';
 
-Patient.hasMany(Appointment);
-Doctor.hasMany(Appointment);
-Appointment.belongsTo(Patient);
-Appointment.belongsTo(Doctor);
+hasMany(Appointment);
+_hasMany(Appointment);
+belongsTo(Patient);
+belongsTo(Doctor);
 
-module.exports = { Patient, Doctor, Appointment };
+export default { Patient, Doctor, Appointment };

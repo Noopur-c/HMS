@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import { define } from '../config/database';
+const sequelize = require('../Connection/database');
 
 const Appointment = sequelize.define('Appointment', {
     date: {
