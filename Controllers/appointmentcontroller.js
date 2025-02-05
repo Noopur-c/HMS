@@ -1,4 +1,4 @@
-const { Appointment, Patient, Doctor } = require('../Models');
+import { Appointment } from '../models/index.js';
 
 const appointmentController = {
   create: async (req, res) => {
@@ -19,6 +19,6 @@ const appointmentController = {
   },
 };
 
-module.exports = appointmentController;
+export default appointmentController;
 
   

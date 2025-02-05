@@ -1,5 +1,5 @@
 // Controllers/patientController.js
-import { Patient } from '../Models';
+import { Patient } from '../models/index.js';
 
 const patientController = {
   // Create a new patient

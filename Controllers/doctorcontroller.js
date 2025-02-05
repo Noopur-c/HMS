@@ -1,4 +1,4 @@
-const { Doctor } = require('../Models');
+import { Doctor } from '../models/index.js';
 
 const doctorController = {
   create: async (req, res) => {
@@ -19,4 +19,4 @@ const doctorController = {
   },
 };
 
-module.exports = doctorController;
+export default doctorController;
