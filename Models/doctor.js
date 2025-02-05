@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-const sequelize = require('../Connection/database');
+import sequelize from '../connection/database.js';
 
 const Doctor = sequelize.define('Doctor', {
     name: {

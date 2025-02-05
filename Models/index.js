@@ -1,10 +1,13 @@
-import Patient, { hasMany } from './patient';
-import Doctor, { hasMany as _hasMany } from './doctor';
-import Appointment, { belongsTo } from './appointment';
+import Patient from './Patient.js';
+import Doctor from './Doctor.js';
+import Appointment from './Appointment.js';
 
-hasMany(Appointment);
-_hasMany(Appointment);
-belongsTo(Patient);
-belongsTo(Doctor);
+// Define relationships
+Patient.hasMany(Appointment, { foreignKey: 'patientId', onDelete: 'CASCADE' });
+Doctor.hasMany(Appointment, { foreignKey: 'doctorId', onDelete: 'CASCADE' });
+Appointment.belongsTo(Patient, { foreignKey: 'patientId' });
+Appointment.belongsTo(Doctor, { foreignKey: 'doctorId' });
 
-export default { Patient, Doctor, Appointment };
+// Export models
+export { Patient, Doctor, Appointment };
+
