@@ -2,6 +2,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { Sequelize, DataTypes } from 'sequelize';
+import cors from 'cors';
 
 import patientRoutes from './Routes/patientRoutes.js';
 import doctorRoutes from './Routes/doctorRoutes.js';
@@ -10,6 +11,7 @@ import appointmentRoutes from './Routes/appointmentRoutes.js';
 // Initialize Express app
 const app = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 // Set up Sequelize and connect to MySQL database
 const sequelize = new Sequelize('hospital_db', 'root', 'Noopur', {
