@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hospital Management System Test</title>
+</head>
+<body>
+  <h1>Hospital Management System</h1>
+
+  <!-- ===== PATIENTS SECTION ===== -->
+  <h2>Patients</h2>
+  <form id="patientForm">
+    <input type="text" id="p_name" placeholder="Name" required>
+    <input type="number" id="p_age" placeholder="Age" required>
+    <input type="text" id="p_gender" placeholder="Gender" required>
+    <input type="text" id="p_address" placeholder="Address" required>
+    <button type="submit">Add Patient</button>
+  </form>
+  <button onclick="getPatients()">Get Patients</button>
+  <pre id="patientList"></pre>
+
+  <!-- ===== DOCTORS SECTION ===== -->
+  <h2>Doctors</h2>
+  <form id="doctorForm">
+    <input type="text" id="d_name" placeholder="Name" required>
+    <input type="text" id="d_specialization" placeholder="Specialization" required>
+    <input type="text" id="d_phone" placeholder="Phone" required>
+    <button type="submit">Add Doctor</button>
+  </form>
+  <button onclick="getDoctors()">Get Doctors</button>
+  <pre id="doctorList"></pre>
+
+  <!-- ===== APPOINTMENTS SECTION ===== -->
+  <h2>Appointments</h2>
+  <form id="appointmentForm">
+    <input type="date" id="a_date" required>
+    <input type="time" id="a_time" required>
+    <input type="number" id="a_patientId" placeholder="Patient ID" required>
+    <input type="number" id="a_doctorId" placeholder="Doctor ID" required>
+    <button type="submit">Add Appointment</button>
+  </form>
+  <button onclick="getAppointments()">Get Appointments</button>
+  <pre id="appointmentList"></pre>
+
+  <script>
+    const baseURL = 'http://localhost:3000';
+
+    // PATIENT
+    document.getElementById('patientForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = {
+        name: document.getElementById('p_name').value,
+        age: document.getElementById('p_age').value,
+        gender: document.getElementById('p_gender').value,
+        address: document.getElementById('p_address').value,
+      };
+      const res = await fetch(`${baseURL}/patients`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
+      });
+      alert('Patient Added!');
+      getPatients();
+    });
+
+    async function getPatients() {
+      const res = await fetch(`${baseURL}/patients`);
+      const data = await res.json();
+      document.getElementById('patientList').textContent = JSON.stringify(data, null, 2);
+    }
+
+    // DOCTOR
+    document.getElementById('doctorForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = {
+        name: document.getElementById('d_name').value,
+        specialization: document.getElementById('d_specialization').value,
+        phone: document.getElementById('d_phone').value,
+      };
+      const res = await fetch(`${baseURL}/doctors`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
+      });
+      alert('Doctor Added!');
+      getDoctors();
+    });
+
+    async function getDoctors() {
+      const res = await fetch(`${baseURL}/doctors`);
+      const data = await res.json();
+      document.getElementById('doctorList').textContent = JSON.stringify(data, null, 2);
+    }
+
+    // APPOINTMENT
+    document.getElementById('appointmentForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = {
+        date: document.getElementById('a_date').value,
+        time: document.getElementById('a_time').value,
+        PatientId: parseInt(document.getElementById('a_patientId').value),
+        DoctorId: parseInt(document.getElementById('a_doctorId').value),
+      };
+      const res = await fetch(`${baseURL}/appointments`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)
+      });
+      alert('Appointment Created!');
+      getAppointments();
+    });
+
+    async function getAppointments() {
+      const res = await fetch(`${baseURL}/appointments`);
+      const data = await res.json();
+      document.getElementById('appointmentList').textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>
